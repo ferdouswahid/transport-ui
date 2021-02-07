@@ -1,0 +1,66 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-12 xl-100">
+      <agm-map [zoom]="13" [latitude]="gmapLat" [longitude]="gmapLng">
+        <agm-marker *ngFor="let stop of stopList"
+                    [latitude]="stop.lat" [longitude]="stop.lng"
+                    [agmFitBounds]="true"
+                    [markerClickable]="true"
+                    (markerClick)="stopClicked(stop)">
+          <!--<agm-info-window>
+            <strong>Bus Stop {{selectedStop}}</strong>
+          </agm-info-window>-->
+        </agm-marker>
+      </agm-map>
+      <!-- [iconUrl]="icon"-->
+    </div>
+
+    <div class="col-xl-12 xl-100">
+      <div class="card height-equal">
+        <div class="card-header">
+          <h1>Selected Bus Stop:<br/></h1>
+          <h3> Id :{{selectedStop.id}}<br/>
+            Name :{{selectedStop.name}}<br/>
+            Place :{{selectedStop.placeName}}<br/>
+            Type :{{selectedStop.type}}<br/>
+          </h3>
+          <button class="btn btn-primary" (click)="getLineList(selectedStop)">Get Stops</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12 xl-100">
+      <div class="card height-equal">
+        <div class="card-header">
+          <h3>Stops list:</h3>
+        </div>
+        <div class="card-body">
+          <div class="user-status table-responsive products-table">
+            <table class="table table-bordernone mb-0">
+              <thead>
+              <tr>
+                <th scope="col">Line</th>
+                <th scope="col">Hour</th>
+                <th scope="col">Realtime</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let line of lineList">
+                <td>{{line.line}}</td>
+                <td>{{line.hour}}</td>
+                <td>{{line.realtime}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Container-fluid Ends-->
