@@ -18,5 +18,8 @@ export class DashboardService {
     return this.http.get<any>(`${environment.apiUrl}/stop/getAll`,{ });
 
   }
+  getUserProfileDetail() {
+    return this.http.get<any>(`${environment.apiUrl}/userProfile/getDetail`,{ });
+  }
 
 }
