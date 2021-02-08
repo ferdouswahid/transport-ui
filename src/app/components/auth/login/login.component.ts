@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../shared/service/auth.service';
-import {ToastService} from '../../../shared/service/toast.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   public registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,private authService: AuthService, private router: Router,
-              private route: ActivatedRoute,private toastService: ToastService) {
+              private route: ActivatedRoute,private toastrService: ToastrService) {
     this.createLoginForm();
     this.createRegisterForm();
   }
@@ -73,14 +73,14 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
           console.log('login response', res);
           if (res.status === true) {
-            this.toastService.successToast('login successfully');
+            this.toastrService.info('Login successfully','Message',{timeOut: 3000,});
             this.router.navigate(['/dashboard/default']);
           }
           if (res.status === false) {
-            this.toastService.failedToast('Login failed');
+            this.toastrService.error( 'Login failed', 'Error',{timeOut: 3000,});
           }
         }, err => {
-          this.toastService.failedToast('Login failed');
+          this.toastrService.error('Login failed','Error',  {timeOut: 3000,});
           console.log('login err: ', err);
           // console.error(`Error: ${err.status} ${err.statusText}`);
         }
@@ -88,21 +88,20 @@ export class LoginComponent implements OnInit {
   }
 
   onRegistration() {
+
     this.authService.registration(this.registerForm.value.name,
       this.registerForm.value.username, this.registerForm.value.password)
       .subscribe(res => {
-          console.log('registration response', res);
+          //console.log('registration response', res);
           if (res.status === true) {
-            console.log('sss');
-            this.toastService.successToast('Registration successful');
+            this.toastrService.info( 'Registration successfully', 'Message',{timeOut: 3000,});
             //this.router.navigate(['/auth/login']);
           }
           if (res.status === false) {
-            console.log('fff');
-            this.toastService.failedToast('Registration failed');
+            this.toastrService.error('Registration failed', 'Error', {timeOut: 3000,});
           }
         }, err => {
-          this.toastService.failedToast('Registration failed');
+          this.toastrService.error( 'Registration failed', 'Error',{timeOut: 3000,});
           console.log('Registration err: ', err);
           // console.error(`Error: ${err.status} ${err.statusText}`);
         }

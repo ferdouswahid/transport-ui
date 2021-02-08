@@ -23,7 +23,6 @@ import {ToastModule} from '../../shared/components/toast/toast.module';
     NgbModule,
     CarouselModule,
     SharedModule,
-    ToastModule,
   ],
   providers: [
     AuthService,

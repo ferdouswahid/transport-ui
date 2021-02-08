@@ -48,6 +48,7 @@
     "ngx-ckeditor": "^8.0.0",
     "ngx-owl-carousel-o": "^2.0.3",
     "ngx-slimscroll": "^8.1.0",
+    "ngx-toastr": "^13.2.0",
     "primeng": "^11.1.0-rc.1",
     "rxjs": "~6.6.0",
     "screenfull": "^5.0.1",

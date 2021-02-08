@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import * as chartData from '../../shared/data/chart';
-import { doughnutData, pieData } from '../../shared/data/chart';
 import {AuthService} from '../../shared/service/auth.service';
 import {DashboardService} from './dashboard.service';
-import {ToastService} from '../../shared/service/toast.service';
+
 import {ActivatedRoute, Router} from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,15 +22,14 @@ export class DashboardComponent implements OnInit {
   lineList=[];
   loadingLine=false;
 
-  constructor(private dashboardService: DashboardService,private toastService: ToastService,
-              private authService: AuthService,private router: Router,) {}
+  constructor(private dashboardService: DashboardService,private toastrService: ToastrService,
+              private authService: AuthService,private router: Router) {}
 
   ngOnInit() {
     if (this.authService.getToken() === '') {
       this.router.navigate(['/auth/login']);
     }else{
       this.getAllStop();
-      this.getUserProfileDetail();
     }
   }
 
@@ -42,16 +40,14 @@ export class DashboardComponent implements OnInit {
   getAllStop(){
     this.dashboardService.getAllStop().subscribe(res => {
         if (res.status === true) {
-          // this.toastService.successToast('All stops fetched successfully');
           this.stopList=res.data;
         }
         if (res.status === false) {
-          this.toastService.failedToast('Error');
-          console.log('response err: ', res);
+          this.toastrService.error( 'Could not fetched All Stops', 'Error',{timeOut: 3000,});
         }
       }, err => {
+        this.toastrService.error( 'Could not fetched All Stops','Error', {timeOut: 3000,});
         console.log(' err: ', err);
-        this.toastService.failedToast('Error');
         // console.error(`Error: ${err.status} ${err.statusText}`);
       }
     );
@@ -66,31 +62,18 @@ export class DashboardComponent implements OnInit {
         }
         if (res.status === false) {
           console.log('response err: ', res);
+          this.toastrService.error( 'Could not fetched Steps','Error', {timeOut: 3000,});
           this.loadingLine=false;
         }
       }, err => {
         console.log(' err: ', err);
         this.loadingLine=false;
+        this.toastrService.error('Could not fetched Steps','Error', {timeOut: 3000,});
         // console.error(`Error: ${err.status} ${err.statusText}`);
       }
     );
   }
 
 
-  getUserProfileDetail(){
-    this.dashboardService.getUserProfileDetail().subscribe(res => {
-        if (res.status === true) {
-          this.userProfileDetail=res.data;
-          console.log(' detail: ', res.data);
-        }
-        if (res.status === false) {
-          this.toastService.failedToast('Error');
-          console.log('response err: ', res);
-        }
-      }, err => {
-        console.log(' err: ', err);
-        this.toastService.failedToast('Error');
-      }
-    );
-  }
+
 }

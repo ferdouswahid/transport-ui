@@ -29,7 +29,7 @@ import {ToastModule} from '../../shared/components/toast/toast.module';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBOXbB9MA_zJqMLQX5MV52kN05jelcTxtw'
     }),
-    ToastModule,
+
   ],
   providers: [
     DashboardService,

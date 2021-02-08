@@ -11,6 +11,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AuthGuard } from './shared/service/auth.guard';
 import { AuthInterceptor } from './shared/service/auth.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { AuthInterceptor } from './shared/service/auth.interceptor';
     DashboardModule,
     AuthModule,
     SharedModule,
-    ToastModule,
+    ToastrModule.forRoot(), // ToastrModule added
     HttpClientModule,
   ],
 
