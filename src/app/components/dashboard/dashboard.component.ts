@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   gmapLng = 7.6055661;
   zoom = 12;
   selectedStop = {id: '', lat: 0, lng: 0, lines: '', location: '',name:'',placeName:'',type:''};
+  userProfileDetail = {name:''};
   public stopList: any = [];
   /*icon = { url: '', scaledSize: { width: 30, height: 30 } };*/
   lineList=[];
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/auth/login']);
     }else{
       this.getAllStop();
+      this.getUserProfileDetail();
     }
   }
 
@@ -74,4 +76,21 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+
+  getUserProfileDetail(){
+    this.dashboardService.getUserProfileDetail().subscribe(res => {
+        if (res.status === true) {
+          this.userProfileDetail=res.data;
+          console.log(' detail: ', res.data);
+        }
+        if (res.status === false) {
+          this.toastService.failedToast('Error');
+          console.log('response err: ', res);
+        }
+      }, err => {
+        console.log(' err: ', err);
+        this.toastService.failedToast('Error');
+      }
+    );
+  }
 }
