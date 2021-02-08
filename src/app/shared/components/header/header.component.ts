@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NavService } from '../../service/nav.service';
+import {AuthService} from '../../service/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() rightSidebarEvent = new EventEmitter<boolean>();
 
-  constructor(public navServices: NavService) { }
+  constructor(public navServices: NavService,private authService: AuthService, private router: Router,) { }
 
   collapseSidebar() {
     this.open = !this.open;
@@ -27,6 +29,11 @@ export class HeaderComponent implements OnInit {
 
   openMobileNav() {
     this.openNav = !this.openNav;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
   }
 
 

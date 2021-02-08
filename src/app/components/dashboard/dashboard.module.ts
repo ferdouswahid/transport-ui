@@ -13,6 +13,7 @@ import {AgmCoreModule} from '@agm/core';
 import {AuthGuard} from '../../shared/service/auth.guard';
 import {AuthService} from '../../shared/service/auth.service';
 import {DashboardService} from './dashboard.service';
+import {ToastModule} from '../../shared/components/toast/toast.module';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -28,6 +29,7 @@ import {DashboardService} from './dashboard.service';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBOXbB9MA_zJqMLQX5MV52kN05jelcTxtw'
     }),
+    ToastModule,
   ],
   providers: [
     DashboardService,
