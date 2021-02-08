@@ -2,44 +2,40 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xl-12 xl-100">
-      <agm-map [zoom]="13" [latitude]="gmapLat" [longitude]="gmapLng">
-        <agm-marker *ngFor="let stop of stopList"
-                    [latitude]="stop.lat" [longitude]="stop.lng"
-                    [agmFitBounds]="true"
-                    [markerClickable]="true"
-                    (markerClick)="stopClicked(stop)">
-          <!--<agm-info-window>
-            <strong>Bus Stop {{selectedStop}}</strong>
-          </agm-info-window>-->
-        </agm-marker>
-      </agm-map>
+      
+      <br/>
+      Note: Click on a marker of the map to select a Stop
+      <br/> <br/>
       <!-- [iconUrl]="icon"-->
     </div>
 
     <div class="col-xl-12 xl-100">
       <div class="card height-equal">
         <div class="card-header">
-          <h1>Selected Bus Stop:<br/></h1>
-          <h3> Id :{{selectedStop.id}}<br/>
+          <h1>Selected Stop:<br/></h1>
+          <h3>
             Name :{{selectedStop.name}}<br/>
             Place :{{selectedStop.placeName}}<br/>
             Type :{{selectedStop.type}}<br/>
           </h3>
-          <button class="btn btn-primary" (click)="getLineList(selectedStop)">Get Stops</button>
+          <button class="btn btn-primary" (click)="getLineList(selectedStop)" [disabled]="loadingLine">Get Steps</button>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="row">
     <div class="col-xl-12 xl-100">
       <div class="card height-equal">
         <div class="card-header">
-          <h3>Stops list:</h3>
+          <h3>Steps list:</h3>
         </div>
         <div class="card-body">
-          <div class="user-status table-responsive products-table">
+
+          <div class="table-responsive" *ngIf="loadingLine==true">
+            <h4>Loading ...</h4>
+          </div>
+          <div class="table-responsive" *ngIf="loadingLine==false">
             <table class="table table-bordernone mb-0">
               <thead>
               <tr>
@@ -60,7 +56,10 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
+
 <!-- Container-fluid Ends-->
+
+
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>

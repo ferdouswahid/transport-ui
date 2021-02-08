@@ -26,6 +26,10 @@ export class AuthService {
       }));
   }
 
+  registration(name: string,userName: string, password: string) {
+    return this.http.post<any>(environment.apiUrl + '/userProfile/registration', { name, userName, password });
+  }
+
   logout() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('roles');

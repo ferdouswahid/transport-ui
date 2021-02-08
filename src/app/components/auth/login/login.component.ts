@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../shared/service/auth.service';
+import {ToastService} from '../../../shared/service/toast.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   public registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,private authService: AuthService, private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,private toastService: ToastService) {
     this.createLoginForm();
     this.createRegisterForm();
   }
@@ -52,8 +53,10 @@ export class LoginComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = this.formBuilder.group({
+      name: [''],
       username: [''],
       password: [''],
+      re_password: [''],
       confirmPassword: [''],
     })
   }
@@ -66,19 +69,18 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit() {
-    console.log(this.loginForm.value);
-    this.router.navigate(['/dashboard']);
-    return;
     this.authService.logIn(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe(res => {
           console.log('login response', res);
           if (res.status === true) {
+            this.toastService.successToast('login successfully');
             this.router.navigate(['/dashboard/default']);
           }
           if (res.status === false) {
-
+            this.toastService.failedToast('Login failed');
           }
         }, err => {
+          this.toastService.failedToast('Login failed');
           console.log('login err: ', err);
           // console.error(`Error: ${err.status} ${err.statusText}`);
         }
@@ -86,7 +88,24 @@ export class LoginComponent implements OnInit {
   }
 
   onRegistration() {
-
+    this.authService.registration(this.registerForm.value.name,
+      this.registerForm.value.username, this.registerForm.value.password)
+      .subscribe(res => {
+          console.log('registration response', res);
+          if (res.status === true) {
+            console.log('sss');
+            this.toastService.successToast('Registration successful');
+            //this.router.navigate(['/auth/login']);
+          }
+          if (res.status === false) {
+            console.log('fff');
+            this.toastService.failedToast('Registration failed');
+          }
+        }, err => {
+          this.toastService.failedToast('Registration failed');
+          console.log('Registration err: ', err);
+          // console.error(`Error: ${err.status} ${err.statusText}`);
+        }
+      );
   }
-
 }

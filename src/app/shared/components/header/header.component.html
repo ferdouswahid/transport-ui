@@ -87,9 +87,11 @@
                     </div>
                     <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
 
-                        <li><a [routerLink]="'/auth/login'">
+                        <li ><!--<a (click)="logout()">
                                 <app-feather-icons [icon]="'log-out'"></app-feather-icons>Logout
-                            </a></li>
+                            </a>-->
+                          <div (click)="logout()"><app-feather-icons [icon]="'log-out'"></app-feather-icons>Logout</div>
+                        </li>
                     </ul>
                 </li>
             </ul>
