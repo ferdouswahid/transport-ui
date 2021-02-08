@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   gmapLng = 7.6055661;
   zoom = 12;
   selectedStop = {id: '', lat: 0, lng: 0, lines: '', location: '',name:'',placeName:'',type:''};
-  public stopList: any = []
+  public stopList: any = [];
   /*icon = { url: '', scaledSize: { width: 30, height: 30 } };*/
   lineList=[];
   loadingLine=false;
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
   getAllStop(){
     this.dashboardService.getAllStop().subscribe(res => {
         if (res.status === true) {
-          //this.toastService.successToast('All stops fetched successfully');
+          // this.toastService.successToast('All stops fetched successfully');
           this.stopList=res.data;
         }
         if (res.status === false) {
@@ -56,7 +56,6 @@ export class DashboardComponent implements OnInit {
   }
 
   getLineList(selectedStop){
-    // this.lineList=[{line:"2",hour:"18:32",realtime:"true"},{line:"2",hour:"19:34",realtime:"false"},{line:"2",hour:"",realtime:"false"}];
     this.loadingLine=true;
     this.dashboardService.getStopList(selectedStop.id).subscribe(res => {
         if (res.status === true) {
