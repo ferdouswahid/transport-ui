@@ -1,9 +1,16 @@
 # transport-ui
-ng serve --port 4200
+
+###Required:
+nodejs 12+
+Angular CLI (npm install -g @angular/cli)
+
+###Install dependency
 npm install
+
+###Run
+ng serve --port 4200
+
+###Deploy 
 npm run-script build
 npm run-script start
 
-#Nav
-src\app\shared\service\nav.service.ts
-src\app\shared\routes\master-routes.ts
