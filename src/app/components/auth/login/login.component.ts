@@ -23,18 +23,19 @@ export class LoginComponent implements OnInit {
 
   owlcarousel = [
     {
-      title: "Welcome",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+      title: 'Welcome',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy.',
     },
     {
-      title: "Welcome",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+      title: 'Welcome',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy.',
     },
     {
-      title: "Welcome",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+      title: 'Welcome',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy.',
     }
-  ]
+  ];
+
   owlcarouselOptions = {
     loop: true,
     items: 1,
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: [''],
       password: [''],
-    })
+    });
   }
 
   createRegisterForm() {
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
       password: [''],
       re_password: [''],
       confirmPassword: [''],
-    })
+    });
   }
 
   ngOnInit() {
@@ -92,13 +93,13 @@ export class LoginComponent implements OnInit {
     this.authService.registration(this.registerForm.value.name,
       this.registerForm.value.username, this.registerForm.value.password)
       .subscribe(res => {
-          //console.log('registration response', res);
+          // console.log('registration response', res);
           if (res.status === true) {
             this.toastrService.info( 'Registration successfully', 'Message',{timeOut: 3000,});
             this.registerForm.reset();
             this.registerForm.markAsPristine();
             this.registerForm.markAsUntouched();
-            //this.router.navigate(['/auth/login']);
+            // this.router.navigate(['/auth/login']);
           }
           if (res.status === false) {
             this.toastrService.error('Registration failed', 'Error', {timeOut: 3000,});
