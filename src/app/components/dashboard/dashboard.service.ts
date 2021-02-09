@@ -10,12 +10,12 @@ export class DashboardService {
   constructor(public http: HttpClient) { }
 
   getStopList(stopId) {
-    const params = new HttpParams().set('id', stopId);
-    return this.http.get<any>(`${environment.apiUrl}/step/getOne`,{ params});
+    const params = new HttpParams().set('stopId', stopId);
+    return this.http.get<any>(`${environment.apiUrl}/step`,{ params});
   }
 
   getAllStop() {
-    return this.http.get<any>(`${environment.apiUrl}/stop/getAll`,{ });
+    return this.http.get<any>(`${environment.apiUrl}/stop`,{ });
 
   }
   getUserProfileDetail() {

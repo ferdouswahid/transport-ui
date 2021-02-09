@@ -95,6 +95,9 @@ export class LoginComponent implements OnInit {
           //console.log('registration response', res);
           if (res.status === true) {
             this.toastrService.info( 'Registration successfully', 'Message',{timeOut: 3000,});
+            this.registerForm.reset();
+            this.registerForm.markAsPristine();
+            this.registerForm.markAsUntouched();
             //this.router.navigate(['/auth/login']);
           }
           if (res.status === false) {
