@@ -13,7 +13,7 @@ import {AuthService} from '../../shared/service/auth.service';
 import {AuthInterceptor} from '../../shared/service/auth.interceptor';
 import {UrlPermission} from '../../shared/service/url.permission';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ToastModule} from '../../shared/components/toast/toast.module';
+
 @NgModule({
   declarations: [LoginComponent],
   imports: [
